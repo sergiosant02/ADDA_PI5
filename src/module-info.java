@@ -4,4 +4,5 @@ module Practica5 {
 	requires geneticos;
 	
 	exports datos;
+	exports tipos;
 }

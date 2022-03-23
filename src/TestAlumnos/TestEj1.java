@@ -9,8 +9,10 @@ import java.util.Map;
 import Geneticos.GenEj1Alumnos;
 import datos.DatoEjercicio1;
 import datos.DatosEj1Alumnos;
+import tipos.Ciudad;
 import us.lsi.ag.agchromosomes.AlgoritmoAG;
 import us.lsi.ag.agstopping.StoppingConditionFactory;
+import us.lsi.common.List2;
 import us.lsi.gurobi.GurobiLp;
 import us.lsi.gurobi.GurobiSolution;
 import us.lsi.solve.AuxGrammar;
@@ -49,11 +51,14 @@ public class TestEj1 {
 		System.out.println("==========================");
 		System.out.println(alg.bestSolution().toString());
 		System.out.println("==========================");
+		
+		
 	}
 
 	public static void main(String[] args) throws IOException {
 		//testGen("Ficheros/PI5Ej1DatosEntrada1.txt");
 		test1PLE("Ficheros/PI5Ej1DatosEntrada1.txt");
+	
 	}
 
 }
