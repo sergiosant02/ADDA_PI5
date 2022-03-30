@@ -122,7 +122,8 @@ public class DatosEj3Alumnos {
 		Integer tiempo = 0;
 		Producto producto = productos.get(i);
 		for(String key: producto.comp.keySet()) {
-			tiempo += producto.comp().get(key) * componenetes.get((Integer.valueOf(key.substring(1))-1)).elab();
+			Integer pos = Integer.valueOf(key.substring(1))-1;
+			tiempo += producto.comp().get(key) * componenetes.get(pos).elab();
 		}
 		return tiempo;
 	}
@@ -147,6 +148,13 @@ public class DatosEj3Alumnos {
 	
 	public static Integer getMaxCapacidadProduccion() {
 		return productos.stream().map(p -> p.maxUnidades()).max(Comparator.comparing(p -> p)).orElse(0);
+	}
+	
+	public static Integer getMaxUnidades(Integer i) {
+		return productos.get(i).maxUnidades();
+	}
+	public static Integer getPrecioProd(Integer i) {
+		return productos.get(i).precio();
 	}
 	
 

@@ -7,6 +7,17 @@ import java.util.Map;
 import datos.DatosEj3Alumnos.Producto;
 
 public record SolucionEj3Alumnos(Map<Producto, Integer> map) {
+	
+	public static SolucionEj3Alumnos parse(Map<String, Double> solucion) {
+		Map<Producto, Integer> mapAux = new HashMap<Producto, Integer>();
+		for(String s: solucion.keySet()) {
+			if(solucion.get(s)>0 && s.contains("x")) {
+				mapAux.put(DatosEj3Alumnos.getProducto(Integer.valueOf(s.split("_")[1])), solucion.get(s).intValue());
+			}
+		}
+		return new  SolucionEj3Alumnos(mapAux);
+	}
+	
 	public static SolucionEj3Alumnos of(List<Integer> ls) {
 		Map<Producto, Integer> solucion = new HashMap<Producto, Integer>();
 		for(int i = 0; i < ls.size(); i++) {

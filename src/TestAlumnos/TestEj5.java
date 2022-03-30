@@ -14,13 +14,7 @@ public class TestEj5 {
 	
 	public static void testGen(String filePath, Predicate<Ciudad> predicadoCiudad, Predicate<Carretera> predicadoCarretera, String ciudadOrigen, String ciudadDestino) {
 		DatosEjercicio5.leerDatos(filePath);
-		for(int i = 0; i < DatosEjercicio5.ciudades.size(); i++) {
-			System.out.println(i + ": " +DatosEjercicio5.ciudades.get(i));
-		}
-		System.out.println();
-		for(int i = 0; i < DatosEjercicio5.carreteras.size(); i++) {
-			System.out.println(i + ": " +DatosEjercicio5.carreteras.get(i));
-		}
+		
 		//System.out.println(DatosEjercicio5.grafo.containsEdge(DatosEjercicio5.ciudades.get(0), DatosEjercicio5.ciudades.get(23)));
 
 		StoppingConditionFactory.NUM_GENERATIONS = 1000;

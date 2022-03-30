@@ -6,13 +6,14 @@ import java.util.function.Predicate;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 import datos.DatosEjercicio5;
+import datos.SolucionEjercicio5Alumnos;
 import tipos.Carretera;
 import tipos.Ciudad;
 import us.lsi.ag.SeqNormalData;
 import us.lsi.ag.agchromosomes.ChromosomeFactory.ChromosomeType;
 import us.lsi.common.List2;
 
-public class GenEj5Alumnos implements SeqNormalData<List<Integer>>{
+public class GenEj5Alumnos implements SeqNormalData<SolucionEjercicio5Alumnos>{
 	
 	private Ciudad ciudadOrigen;
 	private Ciudad ciudadDestino;
@@ -43,6 +44,7 @@ public class GenEj5Alumnos implements SeqNormalData<List<Integer>>{
 		List<Carretera> rsCarretera = List2.empty();
 		Double errorPredicadoCiudad = 0.;
 		Double errorPredicadoCarretera = 0.;
+		
 		if(!DatosEjercicio5.getCiudad(value.get(0)).equals(ciudadOrigen)) {
 			res = Double.NEGATIVE_INFINITY;
 		} else {
@@ -52,6 +54,7 @@ public class GenEj5Alumnos implements SeqNormalData<List<Integer>>{
 			for(int i = 0; i < value.size()-1; i++) {
 				Ciudad or = DatosEjercicio5.getCiudad(value.get(i));
 				Ciudad dest = DatosEjercicio5.getCiudad(value.get(i+1));
+				
 				if(!DatosEjercicio5.grafo.containsEdge(or, dest)) {
 					errorCaminos += DatosEjercicio5.ciudades.size() * 1000.;
 					
@@ -79,35 +82,16 @@ public class GenEj5Alumnos implements SeqNormalData<List<Integer>>{
 			}
 				
 			res = (pesoIdeal - pesoReal) - errorCaminos - errorPredicadoCarretera - errorPredicadoCiudad;
-			res = res;
 			
-			if(value.size()==3) {
-				Double y = 0.;
-			}
-			if(value.size()==4) {
-				Double y = 0.;
-			}
-			if(value.size()==6) {
-				Double y = 0.;
-			}
 		
-		}
-		if(errorCaminos ==Double.NEGATIVE_INFINITY) {
-			Integer t = 0;
-		}
-		if(errorCaminos != 0) {
-			Double t = 0.;
-		}
-		if(!DatosEjercicio5.getCiudad(value.get(0)).equals(ciudadOrigen)) {
-			Integer t = 0;
 		}
 		return res;
 	}
 
 	@Override
-	public List<Integer> solucion(List<Integer> value) {
+	public SolucionEjercicio5Alumnos solucion(List<Integer> value) {
 		// TODO Auto-generated method stub
-		return value.subList(0, value.indexOf(DatosEjercicio5.ciudades.indexOf(ciudadDestino))+1);
+		return SolucionEjercicio5Alumnos.parse(value.subList(0, value.indexOf(DatosEjercicio5.ciudades.indexOf(ciudadDestino))+1));
 	}
 
 

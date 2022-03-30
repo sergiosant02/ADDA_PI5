@@ -1,26 +1,30 @@
 head section
 
+Integer getPresupuesto()
+Double costeContratacion(Integer i)
 Integer getNumCandidatos()
 Integer getValoracion(Integer i)
-Integer getPresupuesto()
-Integer n = getNumCandidatos()
-Double costeContratacion(Integer i)
-Integer coste = getPresupuesto()
 Integer incompatible(Integer i, Integer j)
-Integer contiene(Integer i)
+Integer getNumCualidades()
+Integer getCumpleAlgunaCualidad(Integer i, Integer j)
 
+
+Integer m = getNumCandidatos()
+Integer n = getNumCualidades()
+Double presupuesto = getPresupuesto()
 
 goal section
 
-max sum(getValoracion(i) x[i] , i in 0 .. n)
+max sum(getValoracion(i) x[i], i in 0 .. m)
 
 constraints section
 
-sum(costeContratacion(i) x[i], i in 0 .. n ) < coste  
-sum (incompatible(i, j) x[i] y[j], i in 0 .. n | i != j) < 1, j in 0 .. n
-sum (contiene(i) x[i], i in 0 .. n ) >= 1
+
+sum(costeContratacion(i) x[i], i in 0 .. m) <= presupuesto
+x[i] + x[j] <= 1, i in 0 .. m, j in 0 .. m | incompatible(i,j)=1 && i != j
+sum(getCumpleAlgunaCualidad(i,j) x[i], i in 0 .. m) >= 1, j in 0 .. n 
+
 
 bin
 
-x[i], i in 0 .. n
-y[i], i in 0 .. n
+x[i], i in 0 .. m

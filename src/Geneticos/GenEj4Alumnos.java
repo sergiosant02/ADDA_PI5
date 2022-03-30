@@ -3,11 +3,11 @@ package Geneticos;
 import java.util.List;
 
 import datos.DatosEj4Alumnos;
-import datos.SolucionEjercicio4;
+import datos.SolucionEjercicio4Alumnos;
 import us.lsi.ag.ValuesInRangeData;
 import us.lsi.ag.agchromosomes.ChromosomeFactory.ChromosomeType;
 
-public class GenEj4Alumnos implements ValuesInRangeData<Integer, SolucionEjercicio4> {
+public class GenEj4Alumnos implements ValuesInRangeData<Integer, SolucionEjercicio4Alumnos> {
 	
 
 	public GenEj4Alumnos() {
@@ -57,10 +57,9 @@ public class GenEj4Alumnos implements ValuesInRangeData<Integer, SolucionEjercic
 	}
 
 	@Override
-	public SolucionEjercicio4 solucion(List<Integer> value) {
-		System.out.println(value);
+	public SolucionEjercicio4Alumnos solucion(List<Integer> value) {
 		// TODO Auto-generated method stub
-		return SolucionEjercicio4.of(value);
+		return SolucionEjercicio4Alumnos.of(value);
 	}
 
 	@Override

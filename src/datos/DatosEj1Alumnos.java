@@ -46,7 +46,7 @@ public class DatosEj1Alumnos {
 				ficheros.add(Fichero.parse(linea));
 			}
 		}
-		Integer maxCapaciadAux = memorias.stream().map(m -> m.capacidad()).reduce((acum, num) -> acum +num).orElse(0) * 10000;
+		Integer maxCapaciadAux = ficheros.stream().map(f -> f.tam()).reduce((acum, num) -> acum +num).orElse(0) * 10000;
 		Memoria mAux = new Memoria("MEM"+(memorias.size()+1), maxCapaciadAux, maxCapaciadAux);
 		memorias.add(mAux);
 	}

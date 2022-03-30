@@ -2,14 +2,33 @@ package datos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import datos.DatosEj4Alumnos.Elemento;
 
-
-public record SolucionEjercicio4(SortedMap<String, List<Elemento>> map) {
-	public static SolucionEjercicio4 of(List<Integer> value) {
+public record SolucionEjercicio4Alumnos(SortedMap<String, List<Elemento>> map) {
+	public static SolucionEjercicio4Alumnos parse(Map<String, Double> solucion) {
+		SortedMap<String, List<Elemento>> mapSolucion = new TreeMap<>();
+		for(String key: solucion.keySet()) {
+			if(solucion.get(key) > 0 && key.contains("x")) {
+				String[] partes = key.split("_");
+				String newKey = String.format("Contenedor %d:", (Integer.valueOf(partes[1]) +1));
+				Elemento elemento = DatosEj4Alumnos.getElemento(Integer.valueOf(partes[2]));
+				if(mapSolucion.containsKey(newKey)) {
+					mapSolucion.get(newKey).add(elemento);
+				} else {
+					List<Elemento> ls = new ArrayList<Elemento>();
+					ls.add(elemento);
+					mapSolucion.put(newKey, ls);
+				}
+			}
+		}
+		return new SolucionEjercicio4Alumnos(mapSolucion);
+	}
+	
+	public static SolucionEjercicio4Alumnos of(List<Integer> value) {
 		SortedMap<String, List<Elemento>> map = new TreeMap<>();
 		for(int i = 0; i < value.size(); i++) {
 			String name = "CONT"+(value.get(i)+1);
@@ -22,7 +41,7 @@ public record SolucionEjercicio4(SortedMap<String, List<Elemento>> map) {
 			}
 		}
 	
-		return new SolucionEjercicio4(map);
+		return new SolucionEjercicio4Alumnos(map);
 	}
 	
 	@Override

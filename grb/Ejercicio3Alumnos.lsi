@@ -1,0 +1,31 @@
+head section
+
+Integer getNumProducts()
+Integer getManualTime()
+Integer getTiempoManualTotal(Integer i)
+Integer getTiempoProducTotal(Integer i)
+Integer getMaxUnidades(Integer i)
+Integer getPrecioProd(Integer i)
+Integer getProductionTime()
+
+
+Integer m = getNumProducts()
+Integer prodTime = getProductionTime()
+Integer manualTime = getManualTime()
+
+
+goal section
+
+max sum (getPrecioProd(i) x[i],  i in 0 .. m )
+
+constraints section
+
+sum(getTiempoManualTotal(i) x[i], i in 0 .. m) <= manualTime
+sum(getTiempoProducTotal(i) x[i], i in 0 .. m) <= prodTime
+getMaxUnidades(i) - x[i] >= 0, i in 0 .. m 
+
+
+
+int
+
+x[i], i in 0 .. m

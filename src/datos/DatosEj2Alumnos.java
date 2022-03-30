@@ -37,6 +37,10 @@ public class DatosEj2Alumnos {
 		}
 	}
 	
+	public static Integer incompatibles(Integer i, Integer j) {
+		return listaCandidatos.get(i).incompatibilidades().contains(listaCandidatos.get(j).nombre()) ? 1 : 0;
+	}
+	
 	public static Integer getValoracion(Integer i) {
 		return listaCandidatos.get(i).valoracion();
 	}
@@ -133,7 +137,7 @@ public class DatosEj2Alumnos {
 	
 	public static Integer incompatible(Integer i, Integer j) {
 		Candidato c1 = listaCandidatos.get(i);
-		Candidato c2 = listaCandidatos.get(2);
+		Candidato c2 = listaCandidatos.get(j);
 		Integer res = 0;
 		if(c1.incompatibilidades().contains(c2.nombre()) || c2.incompatibilidades().contains(c1.nombre())) {
 			res = 1;
@@ -141,8 +145,24 @@ public class DatosEj2Alumnos {
 		return res;
 	} 
 	
+	public static Boolean getIncompatible(Integer i, Integer j) {
+		Candidato c1 = listaCandidatos.get(i);
+		Candidato c2 = listaCandidatos.get(2);
+		Integer res = 0;
+		return !(c1.incompatibilidades().contains(c2.nombre()) || c2.incompatibilidades().contains(c1.nombre()));
+			
+	} 
+	
 	public static Integer contiene(Integer i) {
 		return listaCandidatos.get(i).cualidades().stream().anyMatch(s ->cualidadesDeseadas.contains(s)) ? 1 : 0;
+	}
+	
+	public static Integer getNumCualidades() {
+		return cualidadesDeseadas.size();
+	}
+	
+	public static Integer getCumpleAlgunaCualidad(Integer i, Integer j) {
+		return listaCandidatos.get(i).cualidades().contains(cualidadesDeseadas.get(j)) ? 1 : 0;
 	}
 	
 	

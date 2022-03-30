@@ -22,8 +22,8 @@ public class GenEj1Alumnos implements ValuesInRangeData<Integer,SolucionEj1Alumn
 	public Double fitnessFunction(List<Integer> value) {
 		
 		List<Memoria> l = DatosEj1Alumnos.getMemorias();
-		Integer errorExtra = 0;
-		Integer errorExceso = 0;
+		Integer errorExtra = 0; // Error relativo a la tasa máxima de transferencia
+		Integer errorExceso = 0; // Error relativo a cargar una memoria con archivos demasiado pesados
 		
 		List<Integer> excesos = new ArrayList<Integer>();
 		for(int i = 0; i < DatosEj1Alumnos.getMemorias().size()-1; i ++) {
@@ -57,8 +57,6 @@ public class GenEj1Alumnos implements ValuesInRangeData<Integer,SolucionEj1Alumn
 
 	@Override
 	public SolucionEj1Alumnos solucion(List<Integer> value) {
-		System.out.println(value.size());
-		System.out.println(value);
 		// TODO Auto-generated method stub
 		return SolucionEj1Alumnos.of(value);
 	}

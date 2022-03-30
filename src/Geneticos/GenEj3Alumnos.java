@@ -27,7 +27,7 @@ public class GenEj3Alumnos implements ValuesInRangeData<Integer, SolucionEj3Alum
 		Double obj = 0.;
 		Double errorManual = 0.;
 		Double errorProduccion = 0.;
-		Integer errorUnidadesMaximas = 0;
+		Double errorUnidadesMaximas = 0.;
 		//Maximizo el precio
 		for(int i= 0; i < value.size(); i++) {
 			obj += (value.get(i) * DatosEj3Alumnos.getProducto(i).precio());
@@ -42,15 +42,20 @@ public class GenEj3Alumnos implements ValuesInRangeData<Integer, SolucionEj3Alum
 		}
 		//Calculo error maximo unidades
 		for(int i = 0; i < value.size(); i++) {
-			errorUnidadesMaximas -= (DatosEj3Alumnos.getProducto(i).maxUnidades() - value.get(i)) < 0 
-										? (DatosEj3Alumnos.getProducto(i).maxUnidades() - value.get(i)) 
+			errorUnidadesMaximas = ((errorUnidadesMaximas != Double.NEGATIVE_INFINITY) && (DatosEj3Alumnos.getProducto(i).maxUnidades() - value.get(i)) < 0) 
+										? Double.NEGATIVE_INFINITY
 												: 0;
 		}
-		errorManual = errorManual - DatosEj3Alumnos.getManualTime();
-		errorProduccion =  errorProduccion - DatosEj3Alumnos.getProductionTime();
-		Double res = obj*10000 - errorManual * 100000 - errorProduccion * 100000;
-		if(res>=0 && SolucionEj3Alumnos.of(value).beneficio() > 1690 && value.get(6)>16) System.out.println(value);
-		return res;
+		errorManual = DatosEj3Alumnos.getManualTime() - errorManual;
+		//if(errorManual < 0) errorManual = Double.NEGATIVE_INFINITY;
+		errorProduccion = DatosEj3Alumnos.getProductionTime() - errorProduccion;
+		//if(errorProduccion < 0 ) errorProduccion = Double.NEGATIVE_INFINITY;
+		//errorManual = AuxiliaryAg.distanceToEqZero(errorManual);
+		//errorProduccion = AuxiliaryAg.distanceToEqZero(errorProduccion);
+		Double res = (errorManual + errorProduccion + errorUnidadesMaximas) < 0 
+				? (errorManual + errorProduccion + errorUnidadesMaximas) 
+						: obj;
+		return res * 1000;
 	}
 
 	@Override

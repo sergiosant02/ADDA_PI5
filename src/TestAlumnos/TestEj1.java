@@ -9,6 +9,7 @@ import java.util.Map;
 import Geneticos.GenEj1Alumnos;
 import datos.DatoEjercicio1;
 import datos.DatosEj1Alumnos;
+import datos.SolucionEj1Alumnos;
 import tipos.Ciudad;
 import us.lsi.ag.agchromosomes.AlgoritmoAG;
 import us.lsi.ag.agstopping.StoppingConditionFactory;
@@ -24,19 +25,14 @@ public class TestEj1 {
 			DatosEj1Alumnos.leerDatos(filePath);
 			AuxGrammar.generate(DatosEj1Alumnos.class, "grb/Ejercicio1Alumnos.lsi", "ple/ejercicio1Alumnos.lp");
 			GurobiSolution gs = GurobiLp.gurobi("ple/Ejercicio1Alumnos.lp");
-			System.out.println(gs.values);
-			Map<String, Double> m = gs.values;
-			List<Double> l = new ArrayList<Double>();
-			System.out.println(m);
+			System.out.println(SolucionEj1Alumnos.parse(gs.values));
 			System.out.println("=============================");
-			System.out.println(l);
+	
 		
 	}
 	
 	public static void testGen(String filePath) {
 		DatosEj1Alumnos.leerDatos(filePath);
-		System.out.println(DatosEj1Alumnos.getFicheros());
-		System.out.println(DatosEj1Alumnos.getMemorias());
 		StoppingConditionFactory.NUM_GENERATIONS = 1000;
 		/*AlgoritmoAG.MUTATION_RATE = 0.7;
 		AlgoritmoAG.ELITISM_RATE = 0.7;*/
@@ -56,8 +52,15 @@ public class TestEj1 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		//testGen("Ficheros/PI5Ej1DatosEntrada1.txt");
+		System.out.println("Fichero 1");
+		testGen("Ficheros/PI5Ej1DatosEntrada1.txt");
 		test1PLE("Ficheros/PI5Ej1DatosEntrada1.txt");
+		System.out.println("Fichero 2");
+		testGen("Ficheros/PI5Ej1DatosEntrada2.txt");
+		test1PLE("Ficheros/PI5Ej1DatosEntrada2.txt");
+		System.out.println("Fichero 3");
+		testGen("Ficheros/PI5Ej1DatosEntrada3.txt");
+		test1PLE("Ficheros/PI5Ej1DatosEntrada3.txt");
 	
 	}
 

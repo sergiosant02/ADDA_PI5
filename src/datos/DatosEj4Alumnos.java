@@ -129,6 +129,16 @@ public class DatosEj4Alumnos {
 		return elementos.size();
 	}
 	
+	public static Integer getCapacidadContenedor(Integer i) {
+		return contenedores.get(i).capacidad();
+	}
+	
+	public static Integer getTamElemento(Integer i) {
+		return elementos.get(i).tam();
+	}
+	
+	
+	
 	public static Integer getOcupado(List<Integer> asignacion, Integer contenedor) {
 		Integer sum = 0;
 		for(int i = 0; i < asignacion.size(); i++) {
@@ -137,39 +147,6 @@ public class DatosEj4Alumnos {
 			}
 		}
 		return contenedores.get(contenedor).capacidad()-sum;
-	}
-	
-	
-	
-	
-	
-	public record SolucionEjercicio4B(Map<String,List<Elemento>> map) {
-		public static SolucionEjercicio4B of(List<Integer> value) {
-			Map<String, List<Elemento>> map = new HashMap<>();
-			
-			for(int i = 0; i < value.size(); i ++) {
-				String key = "CONT"+(value.get(i)+1);
-				if(map.containsKey(key)) {
-					
-					map.get(key).add(DatosEj4Alumnos.getElemento(i));
-				} else {
-					List<Elemento> ls = new ArrayList<>();
-					ls.add(DatosEj4Alumnos.getElemento(i));
-					map.put(key, ls);
-				}
-			}
-			return new SolucionEjercicio4B(map);
-		}
-		
-		@Override
-		public String toString() {
-			String s = "";
-			for(String key: map.keySet()) {
-				s += key + ": " + map.get(key).stream().map(e -> e.nombre()).toList().toString() + "\n";
-			}
-			
-			return s;
-		}
 	}
 	
 

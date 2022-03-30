@@ -1,0 +1,25 @@
+head section
+
+Integer getNumContenedores()
+Integer getTamElemento(Integer i)
+Integer getNumElementos()
+Integer getCapacidadContenedor(Integer i)
+
+
+Integer m = getNumContenedores()-1
+Integer n = getNumElementos() 
+
+goal section
+
+max sum(x[i,j], j in 0 .. n, i in 0 .. m ) 
+
+constraints section
+
+sum(x[i,j], i in 0 .. m) <= 1, j in 0 .. n
+sum(getTamElemento(j) x[i,j], j in 0 .. n) <= getCapacidadContenedor(i), i in 0 .. m
+sum(getTamElemento(j) x[i,j], j in 0 .. n) - getCapacidadContenedor(i) = 0, i in 0 .. m
+
+bin
+
+x[i,j], i in 0 .. m, j in 0 .. n
+y[i], i in 0 .. m
